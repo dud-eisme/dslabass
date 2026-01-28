@@ -16,6 +16,9 @@ int main() {
     printf("Book %d:\n", i + 1);
     printf("Book ID: ");
     scanf("%d", &library[i].bookID);
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF)
+      ;
 
     printf("Title: ");
     fgets(library[i].title, sizeof(library[i].title), stdin);
@@ -26,6 +29,7 @@ int main() {
     printf("Price: ");
     scanf("%f", &library[i].price);
   }
+  printf("\n\n");
 
   // Printing
   for (int i = 0; i < 5; i++) {

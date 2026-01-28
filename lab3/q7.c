@@ -66,43 +66,44 @@ int main() {
     scanf("%d", &arr[i]);
   }
 
-#ifdef _WIN32
-  system("cls");
-#else
-  system("clear");
-#endif
-
   // Menu
-  int opt;
-  printf("-----ARRAY OPERATIONS MENU-----\nAvailable Options:\n1.\tSort in "
-         "Ascending\n2.\tSort in Descending\n3.\tSearch for an "
-         "element\n4.\tFind Maximum and Minimum values\n5.\tCalculate average "
-         "of the elements\nChoose and option: ");
-  scanf("%d", &opt);
+  while (true) {
+    int opt;
+    printf(
+        "-----ARRAY OPERATIONS MENU-----\nAvailable Options:\n1.\tSort in "
+        "Ascending\n2.\tSort in Descending\n3.\tSearch for an "
+        "element\n4.\tFind Maximum and Minimum values\n5.\tCalculate average "
+        "of the elements\n6.\tExit\nChoose and option: ");
+    scanf("%d", &opt);
 
-  if (opt == 1) {
-    sortAscending(arr, n);
-    printElements(arr, n);
-  }
+    if (opt == 1) {
+      sortAscending(arr, n);
+      printElements(arr, n);
+    }
 
-  else if (opt == 2) {
-    sortDescending(arr, n);
-    printElements(arr, n);
-  }
+    else if (opt == 2) {
+      sortDescending(arr, n);
+      printElements(arr, n);
+    }
 
-  else if (opt == 3) {
-    printf("Enter the element you would like the address of (in the array): ");
-    int inp;
-    scanf("%d", inp);
-    printf("Element %d is present at %d\n", inp, returnAdd(arr, n, inp));
-  }
+    else if (opt == 3) {
+      printf(
+          "Enter the element you would like the address of (in the array): ");
+      int inp;
+      scanf("%d", inp);
+      printf("Element %d is present at %d\n", inp, returnAdd(arr, n, inp));
+    }
 
-  else if (opt == 4) {
-    sortAscending(arr, n);
-    printf("Maximum Value:\t%d\nMinimum Value:\t%d\n", arr[0], arr[n - 1]);
-  }
+    else if (opt == 4) {
+      sortAscending(arr, n);
+      printf("Maximum Value:\t%d\nMinimum Value:\t%d\n", arr[0], arr[n - 1]);
+    }
 
-  else if (opt == 5) {
-    printf("Average of all elements in the array is: %d\n", avg(arr, n));
+    else if (opt == 5) {
+      printf("Average of all elements in the array is: %d\n", avg(arr, n));
+    }
+
+    else if (opt == 6)
+      return 0;
   }
 }

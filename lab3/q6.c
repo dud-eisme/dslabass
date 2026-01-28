@@ -17,6 +17,9 @@ int main() {
   printf("Enter Details of 5 Books\n");
   for (int i = 0; i < n; i++) {
     printf("Book %d:\n", i + 1);
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF)
+      ;
 
     printf("Title: ");
     fgets(library[i].title, sizeof(library[i].title), stdin);
