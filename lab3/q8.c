@@ -31,10 +31,13 @@ int main() {
     scanf("%d", &opt);
 
     if (opt == 1) {
+      int c;
       printf("Student %d Details:\n", i + 1);
 
       printf("Student ID: ");
       scanf("%d", &records[i].studID);
+      while ((c = getchar()) != '\n' && c != EOF)
+        ;
 
       printf("Department: ");
       fgets(records[i].dept, sizeof(records[i].dept), stdin);
@@ -47,7 +50,7 @@ int main() {
       i++;
     }
 
-    if (opt == 2) {
+    else if (opt == 2) {
       int optrem;
       printf("Which record would you like to delete? ");
       printf("Available elements: ");
@@ -62,7 +65,7 @@ int main() {
       i--;
     }
 
-    if (opt == 3) {
+    else if (opt == 3) {
       int idsearch;
       printf("Enter the ID of the Student you would like to access the details "
              "of: ");
@@ -78,7 +81,7 @@ int main() {
         }
     }
 
-    if (opt == 4)
+    else if (opt == 4)
       return 0;
   }
 }
