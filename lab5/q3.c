@@ -79,11 +79,9 @@ int main() {
         k++;
       }
 
-      // Move to the next column in B_t
       while (j <= b_terms && btrans[j].row == current_col)
         j++;
     }
-    // Move to the next row in A
     while (i <= a_terms && a[i].row == current_row)
       i++;
   }
