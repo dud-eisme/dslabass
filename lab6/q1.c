@@ -1,26 +1,66 @@
 #include <stdio.h>
+#include <string.h>
 #define MAX 100
 
-typedef struct Stack{
-  int arr[MAX];
-  int top;
-}Stack;
+char stack[MAX];
+int top = -1;
 
+void push(char ch)
+{
+    if (top < MAX - 1)
+        stack[++top] = ch;
+}
 
-void push(struct Stack* s, int n) {
-    if (s->top < MAX - 1) {
-        s->arr[++(s->top)] = n;
+char pop()
+{
+    if (top >= 0)
+        return stack[top--];
+
+    return '\0';
+}
+
+int check(char str[])
+{
+    for (int i = 0; i < strlen(str); i++)
+    {
+        char ch = str[i];
+
+        if (ch == '(' || ch == '{' || ch == '[')
+            push(ch);
+
+        else if (ch == ')' || ch == '}' || ch == ']')
+        {
+
+            if (top == -1)
+                return 0;
+
+            char popped = pop();
+
+            if (ch == ')' && popped != '(' ||
+                ch == '}' && popped != '{' ||
+                ch == ']' && popped != '[')
+            {
+                return 0;
+            }
+        }
     }
+    if (top == -1)
+        return 1;
+    else
+        return 0;
 }
 
-int pop(struct Stack* s) {
-    if (s->top == -1) 
-      return '\0';
-    return s->arr[(s->top)--];
-}
+int main()
+{
 
-int main() {
-  Stack stack;
+    char str[MAX];
+    printf("Enter the Expression :");
+    scanf("%s", str);
 
-  return 0;
+    if (check(str))
+        printf("Balanced\n");
+    else
+        printf("Not Balanced\n");
+
+    return 0;
 }
