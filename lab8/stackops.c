@@ -1,11 +1,5 @@
 #include "stackops.h"
 
-
-struct Stack {
-  int arr[MAX];
-  int top;
-};
-
 void init(struct Stack *s) { s->top = -1; }
 
 void push(struct Stack *s, int val) {

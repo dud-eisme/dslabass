@@ -1,34 +1,14 @@
-#include "stackops.h"
-#include <string.h>
 #include <ctype.h>
+#include <stdio.h>
+#include <string.h>
+#define MAX 100
 
-char* PosttoIn(char arr[]) {
-  struct Stack s;
-  int j = 0;
-  static char newarr[MAX];
+char stack[MAX][MAX];
+int top = -1;
 
-  int count = 0;
+void push(char *str) { strcpy(stack[++top], str); }
 
-  for (int i = 0; i < strlen(arr); i++)
-    if (arr[i] == '+' || arr[i] == '-' || arr[i] == '*' || arr[i] == '/') newarr[j++] = '(';
-
-  for (int i = strlen(arr) - 1; i >= 0; i--) {
-    if (isspace(arr[i])) continue;
-    if (isalnum(arr[i])) push(&s, arr[i]);
-    else {
-      int op2 = pop(&s);
-      if (!count) {
-        int op1 = pop(&s);
-        newarr[j++] = op1;
-        count++;
-      }
-      newarr[j++] = arr[i];
-      newarr[j++] = op2;
-      newarr[j++] = ')';
-    }
-  }
-  return newarr;
-}
+void pop(char *dest) { strcpy(dest, stack[top--]); }
 
 int main() {
   char inp[MAX];
@@ -36,9 +16,20 @@ int main() {
   fgets(inp, MAX, stdin);
   inp[strcspn(inp, "\n")] = 0;
 
-  char out[MAX];
-  strcpy(out, PosttoIn(inp));
-  printf("Infix expression: %s\n", out);
+  for (int i = 0; inp[i] != '\0'; i++) {
+    if (isalnum(inp[i])) {
+      char operand[2] = {inp[i], '\0'};
+      push(operand);
+    } else {
+      char op1[MAX], op2[MAX];
+      pop(op2);
+      pop(op1);
+
+      char temp[MAX];
+      snprintf(temp, MAX, "(%s%c%s)", op1, inp[i], op2);
+      push(temp);
+    }
+  }
 
   return 0;
 }
